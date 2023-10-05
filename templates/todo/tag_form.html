@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}<title>Tag form</title>{% endblock %}
+{% load crispy_forms_filters %}
 
-</body>
-</html>
+{% block content %}
+  <h1>
+    {{ object|yesno:"Update, Create" }} tag
+  </h1>
+  <hr>
+  <br>
+  <form action="" method="post" novalidate>
+  {% csrf_token %}
+    {{ form|crispy }}
+    <br>
+    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">
+      Back
+    </a>
+    <input class="btn btn-primary" type="submit" value="{{ object|yesno:"Update name, Add tag" }}">
+  </form>
+{% endblock %}

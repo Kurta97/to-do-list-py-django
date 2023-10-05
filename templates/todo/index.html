@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+    <h1>TO DO LIST</h1>
+    <hr>
+    <br>
+    <h3>Main information about project:</h3>
+    <br>
+    <p class="description"><i>
+      Home page of "To do list" django project.
+    </i></p>
+    <br>
+    <ul>
+        <li><strong>Number of tasks:</strong> {{ num_tasks }}</li>
+        <li><strong>Number of tags:</strong> {{ num_tags }}</li>
+        <li><strong>Tasks competed:</strong> {{ completed_tasks }}</li>
+    </ul>
+{% endblock %}

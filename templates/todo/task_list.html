@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}<title>Tasks</title>{% endblock %}
+{% load crispy_forms_filters %}
 
-</body>
-</html>
+{% block content %}
+  <h1>
+    TODO list
+    <a href="{% url 'todo:task-create' %}" class="btn btn-primary link-to-page"  style="float: right">
+      Add task
+    </a>
+  <hr>
+  <br>
+  </h1>
+  {% if task_list %}
+    {% for task in task_list %}
+    {% if task.status %}
+      <a class="btn btn-secondary link-to-page" style="float: right" href="{% url "todo:compete-undo-task" pk=task.id %}">
+        Undo
+      </a>
+      {% else %}
+      <a class="btn btn-success link-to-page" style="float: right" href="{% url "todo:compete-undo-task" pk=task.id %}">
+        Complete
+      </a>
+    {% endif %}
+      <p>
+        <strong>{{ task.content }}
+          <span style="color: {% if task.status %}green{% else %}red{% endif %}">{% if task.status %}Done{% else %}Not done{% endif %}</span>
+        </strong>
+      </p>
+      <p><strong>Created: </strong> {{ task.create }}
+        {% if task.deadline %}<span style="color: red"><strong> Deadline </strong> {{ task.deadline }}</span>{% endif %}</p>
+      <p>Tags:
+        {% for tag in task.tags.all %}
+          <i>#{{ tag.name }}</i>
+        {% endfor %}
+      </p>
+      <p>
+        <a href="{% url 'todo:task-update' pk=task.id %}" class="btn btn-primary link-to-page">
+          Update task
+        </a>
+        <a href="{% url 'todo:task-delete' pk=task.id %}"  class="btn btn-danger link-to-page">
+          Delete task
+        </a>
+      </p>
+    <hr>
+    {% endfor %}
+  {% else %}
+    <p>There are no tasks...</p>
+  {% endif %}
+{% endblock %}

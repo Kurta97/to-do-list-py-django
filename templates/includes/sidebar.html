@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% block sidebar %}
+  <ul class="sidebar-nav list-group">
+    <li class="list-group-item">
+      <a href="{% url "todo:index" %}">
+        Home
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a href="{% url "todo:task-list" %}">
+        Tasks
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a href="{% url "todo:tag-list" %}">
+        Tags
+      </a>
+    </li>
+  </ul>
+{% endblock sidebar %}
