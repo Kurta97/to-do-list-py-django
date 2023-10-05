@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}<title>Task deletion</title>{% endblock %}
+{% block content %}
+  <h1>
+    Delete task
+  <hr>
+  </h1>
+  <br>
+  <p>
+    Are you sure you want to delete this task:
+      <b>
+        {{ task.content }}
+      </b>?
+  </p>
+  <br>
+  <p>
+    <i>
+      Maybe you can do it?
+    </i>
+  </p>
+  <form action="" method="post">
+  {% csrf_token %}
+    <br>
+    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">
+      Cancel
+    </a>
+    <input class="btn btn-danger" type="submit" value="No, I can't... Delete this task">
+  </form>
+{% endblock %}
